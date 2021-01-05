@@ -140,6 +140,22 @@ public class CarControllerTest {
     }
 
     /**
+     * Tests the update of a single car by ID.
+     * @throws Exception if the update operation of a vehicle fails
+     */
+    @Test
+    public void updateCar() throws Exception {
+
+        Car car = getCar();
+        car.setCondition(Condition.NEW);
+        mvc.perform(put("/cars/1", car)
+                .content(json.write(car).getJson())
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    /**
      * Creates an example Car object for use in testing.
      * @return an example Car object
      */
